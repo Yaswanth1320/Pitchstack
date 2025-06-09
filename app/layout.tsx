@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import localFonts from "next/font/local";
 import "./globals.css";
 import "easymde/dist/easymde.min.css";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "PitchStack",
@@ -15,7 +15,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/@tailwindcss/typography@0.4.x/dist/typography.min.css"
+        />
+      </head>
+      <body>
+        {children}
+        <Toaster position="top-right" richColors />
+      </body>
     </html>
   );
 }

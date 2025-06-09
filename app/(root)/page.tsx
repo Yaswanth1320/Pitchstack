@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import SerachForm from "@/components/SerachForm";
 import StartupCard, { StartupCardProps } from "@/components/StartupCard";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
@@ -6,10 +7,15 @@ import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { query?: string };
+  searchParams: Promise<{ query?: string }>;
 }) {
-  const query = await searchParams.query;
-  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY });
+  const query = (await searchParams).query;
+  const params = { search: query || null };
+
+  const session = await auth();
+  console.log(session?.id);
+
+  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
   return (
     <>
       <section className="w-full bg-[#007BFF] min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6 font-abc">

@@ -6,6 +6,7 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./sanity/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -14,20 +15,23 @@ const config: Config = {
       },
       colors: {
         primary: {
-          "100": "#E0F2FF",
-          DEFAULT: "#007BFF", // Classic blue
+          100: "#FFE8F0", // Classic blue00
+          DEFAULT: "#EE2B69",
         },
-        secondary: "#60A5FA", // Light blue (Tailwind's blue-400)
+        secondary: "#FBE843",
         black: {
-          "100": "#2C3E50",
-          "200": "#1A1A1A",
-          "300": "#4B5563",
+          100: "#333333",
+          200: "#141413",
+          300: "#7D8087",
           DEFAULT: "#000000",
         },
         white: {
-          "100": "#F9FAFB",
+          100: "#F7F7F7",
           DEFAULT: "#FFFFFF",
         },
+      },
+      fontFamily: {
+        "work-sans": ["var(--font-work-sans)"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -37,14 +41,11 @@ const config: Config = {
       boxShadow: {
         100: "2px 2px 0px 0px rgb(0, 0, 0)",
         200: "2px 2px 0px 2px rgb(0, 0, 0)",
-        300: "2px 2px 0px 2px rgb(0, 123, 255)", // blue shadow
-      },
-      fontFamily: {
-        abc: ["Kanit", "sans-serif"],
+        300: "2px 2px 0px 2px rgb(238, 43, 105)", // blue shadow
       },
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
 
-module.exports = config;
+export default config;

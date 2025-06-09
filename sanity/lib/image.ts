@@ -1,11 +1,16 @@
-import createImageUrlBuilder from '@sanity/image-url'
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+// sanity/lib/image.ts
+import createImageUrlBuilder from "@sanity/image-url";
+import type { Image } from "sanity";
 
-import { dataset, projectId } from '../env'
+import { client } from "./client"; // <-- Path to your Sanity client instance
 
-// https://www.sanity.io/docs/image-url
-const builder = createImageUrlBuilder({ projectId, dataset })
+const imageBuilder = createImageUrlBuilder(client);
 
-export const urlFor = (source: SanityImageSource) => {
-  return builder.image(source)
-}
+export const urlForImage = (source: Image | null | undefined) => {
+  if (!source) {
+    return undefined; // Or return a default image URL string
+  }
+  return imageBuilder?.image(source)?.auto("format")?.fit("max");
+  // You can chain other methods like .width(), .height(), .quality() if needed
+  // but since you're using Next/image with width/height props, the core .image(source) is enough for src
+};
